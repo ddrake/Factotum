@@ -1,0 +1,8 @@
+# Ignore all non-explicit queries
+syntax: glob
+CleanupAppData/obj/*
+CleanupAppData/bin/*
+Factotum/obj/*
+Factotum/bin/*
+Setup/Debug/*
+Setup/Release/*

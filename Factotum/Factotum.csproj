@@ -1,0 +1,989 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0633488A-4C69-4046-9054-A063F788893B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Factotum</RootNamespace>
+    <AssemblyName>Factotum</AssemblyName>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationIcon>Factotum.ico</ApplicationIcon>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlServerCe, Version=9.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivationKey.cs" />
+    <Compile Include="AppMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppMain.Designer.cs">
+      <DependentUpon>AppMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Arrow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Boundary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ChangeFinder.cs" />
+    <Compile Include="ChgCalBlock.cs" />
+    <Compile Include="ChgCalibrationProcedure.cs" />
+    <Compile Include="ChgComponent.cs" />
+    <Compile Include="ChgComponentMaterial.cs" />
+    <Compile Include="ChgComponentType.cs" />
+    <Compile Include="ChgCouplantType.cs" />
+    <Compile Include="ChgCustomer.cs" />
+    <Compile Include="ChgDucer.cs" />
+    <Compile Include="ChgDucerModel.cs" />
+    <Compile Include="ChgGridProcedure.cs" />
+    <Compile Include="ChgGridSize.cs" />
+    <Compile Include="ChgInspector.cs" />
+    <Compile Include="ChgLine.cs" />
+    <Compile Include="ChgMeter.cs" />
+    <Compile Include="ChgMeterDucer.cs" />
+    <Compile Include="ChgMeterModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChgOutage.cs" />
+    <Compile Include="ChgOutageGridProcedure.cs" />
+    <Compile Include="ChgOutageInspector.cs" />
+    <Compile Include="ChgPipeScheduleLookup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChgRadialLocation.cs" />
+    <Compile Include="ChgSite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChgSpecialCalParam.cs" />
+    <Compile Include="ChgSystem.cs" />
+    <Compile Include="ChgThermo.cs" />
+    <Compile Include="ChgUnit.cs" />
+    <Compile Include="ComponentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentEdit.designer.cs">
+      <DependentUpon>ComponentEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComponentImporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentImporter.Designer.cs">
+      <DependentUpon>ComponentImporter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComponentListing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentListing.Designer.cs">
+      <DependentUpon>ComponentListing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComponentListingDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComponentListingDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ComponentTypeEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentTypeEdit.designer.cs">
+      <DependentUpon>ComponentTypeEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComponentTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentTypeView.designer.cs">
+      <DependentUpon>ComponentTypeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComponentView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentView.designer.cs">
+      <DependentUpon>ComponentView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CalBlockEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalBlockEdit.designer.cs">
+      <DependentUpon>CalBlockEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CalBlockView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalBlockView.designer.cs">
+      <DependentUpon>CalBlockView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CalibrationProcedureEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalibrationProcedureEdit.designer.cs">
+      <DependentUpon>CalibrationProcedureEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CalibrationProcedureView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalibrationProcedureView.designer.cs">
+      <DependentUpon>CalibrationProcedureView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdditionalMeasurementEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdditionalMeasurementEdit.designer.cs">
+      <DependentUpon>AdditionalMeasurementEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActivationKeyGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActivationKeyGenerator.designer.cs">
+      <DependentUpon>ActivationKeyGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActivationKeyInputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActivationKeyInputBox.designer.cs">
+      <DependentUpon>ActivationKeyInputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseUpdater.cs" />
+    <Compile Include="DataGridViewPrinter.cs" />
+    <Compile Include="MergedGridExporter.cs" />
+    <Compile Include="OutageChangesViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutageChangesViewer.Designer.cs">
+      <DependentUpon>OutageChangesViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanametricsExporter.cs" />
+    <Compile Include="Preferences_General.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preferences_General.Designer.cs">
+      <DependentUpon>Preferences_General.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatusReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StatusReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SystemView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SystemView.designer.cs">
+      <DependentUpon>SystemView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LineView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LineView.designer.cs">
+      <DependentUpon>LineView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EpriGrid.cs" />
+    <Compile Include="Preferences_Master.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preferences_Master.Designer.cs">
+      <DependentUpon>Preferences_Master.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutageExporter.cs" />
+    <Compile Include="UserSettings.cs" />
+    <Compile Include="WorkOrderLabelReport.cs" />
+    <Compile Include="CustomerConfigView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerConfigView.designer.cs">
+      <DependentUpon>CustomerConfigView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ESpecialCalParam.cs" />
+    <Compile Include="ESpecialCalValue.cs" />
+    <Compile Include="FieldDataSheetExporter.cs" />
+    <Compile Include="ICustomerEntity.cs" />
+    <Compile Include="DataGridViewStd.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IEntityEditForm.cs">
+    </Compile>
+    <Compile Include="EntityEventArgs.cs" />
+    <Compile Include="ExceptionLogger.cs" />
+    <Compile Include="IEntity.cs" />
+    <Compile Include="ReportDefinitionImporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportDefinitionImporter.Designer.cs">
+      <DependentUpon>ReportDefinitionImporter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportValidator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportValidator.Designer.cs">
+      <DependentUpon>ReportValidator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RsCalData.cs" />
+    <Compile Include="RsInstrument.cs" />
+    <Compile Include="RsGrid.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RsLegend.cs" />
+    <Compile Include="RsPartition.cs" />
+    <Compile Include="RsStatsAndNonGrid.cs" />
+    <Compile Include="RsGraphicNotes.cs" />
+    <Compile Include="RsInspectionHeading.cs" />
+    <Compile Include="RsCmpDetails.cs" />
+    <Compile Include="RsCmpDefinition.cs" />
+    <Compile Include="EBoundary.cs" />
+    <Compile Include="EBoundaryPoint.cs" />
+    <Compile Include="DrawingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EAdditionalMeasurement.cs" />
+    <Compile Include="EArrow.cs" />
+    <Compile Include="EDrawingControl.cs" />
+    <Compile Include="EGraphic.cs" />
+    <Compile Include="ENotation.cs" />
+    <Compile Include="GraphicEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphicEdit.designer.cs">
+      <DependentUpon>GraphicEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GridEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GridEdit.designer.cs">
+      <DependentUpon>GridEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EGrid.cs" />
+    <Compile Include="Notation.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PreviewGraphic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewGraphic.designer.cs">
+      <DependentUpon>PreviewGraphic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RadialLocationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RadialLocationView.designer.cs">
+      <DependentUpon>RadialLocationView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RadialLocationEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RadialLocationEdit.designer.cs">
+      <DependentUpon>RadialLocationEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GridSizeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GridSizeView.designer.cs">
+      <DependentUpon>GridSizeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GridSizeEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GridSizeEdit.designer.cs">
+      <DependentUpon>GridSizeEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EGridSize.cs" />
+    <Compile Include="ERadialLocation.cs" />
+    <Compile Include="InspectionPeriodEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InspectionPeriodEdit.designer.cs">
+      <DependentUpon>InspectionPeriodEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KrautkramerParser.cs" />
+    <Compile Include="CouplantTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CouplantTypeView.designer.cs">
+      <DependentUpon>CouplantTypeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CouplantTypeEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CouplantTypeEdit.designer.cs">
+      <DependentUpon>CouplantTypeEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EInspectionPeriod.cs" />
+    <Compile Include="EMeasurement.cs" />
+    <Compile Include="ESurvey.cs" />
+    <Compile Include="GridProcedureView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GridProcedureView.designer.cs">
+      <DependentUpon>GridProcedureView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GridProcedureEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GridProcedureEdit.designer.cs">
+      <DependentUpon>GridProcedureEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanametricsParser.cs" />
+    <Compile Include="MainReport.cs" />
+    <Compile Include="ReportSection.cs" />
+    <Compile Include="RsHeading.cs" />
+    <Compile Include="SpecialCalParamEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpecialCalParamEdit.designer.cs">
+      <DependentUpon>SpecialCalParamEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpecialCalParamView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpecialCalParamView.designer.cs">
+      <DependentUpon>SpecialCalParamView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatusReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatusReport.Designer.cs">
+      <DependentUpon>StatusReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextFileParser.cs" />
+    <Compile Include="ThermoView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThermoView.designer.cs">
+      <DependentUpon>ThermoView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThermoEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThermoEdit.designer.cs">
+      <DependentUpon>ThermoEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MeterView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MeterView.designer.cs">
+      <DependentUpon>MeterView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MeterEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MeterEdit.designer.cs">
+      <DependentUpon>MeterEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InspectorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InspectorView.designer.cs">
+      <DependentUpon>InspectorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InspectorEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InspectorEdit.designer.cs">
+      <DependentUpon>InspectorEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KitView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KitView.designer.cs">
+      <DependentUpon>KitView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KitEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KitEdit.designer.cs">
+      <DependentUpon>KitEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DucerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DucerView.designer.cs">
+      <DependentUpon>DucerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DucerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DucerEdit.designer.cs">
+      <DependentUpon>DucerEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EDucer.cs" />
+    <Compile Include="MeterModelView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MeterModelView.designer.cs">
+      <DependentUpon>MeterModelView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MeterModelEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MeterModelEdit.designer.cs">
+      <DependentUpon>MeterModelEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DucerModelView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DucerModelView.designer.cs">
+      <DependentUpon>DucerModelView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DucerModelEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DucerModelEdit.designer.cs">
+      <DependentUpon>DucerModelEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DsetEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DsetEdit.designer.cs">
+      <DependentUpon>DsetEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ECalBlock.cs" />
+    <Compile Include="EDset.cs" />
+    <Compile Include="EDucerModel.cs" />
+    <Compile Include="EKit.cs" />
+    <Compile Include="EMeter.cs" />
+    <Compile Include="EMeterModel.cs" />
+    <Compile Include="EThermo.cs" />
+    <Compile Include="InspectedComponentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InspectedComponentEdit.designer.cs">
+      <DependentUpon>InspectedComponentEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InspectedComponentView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InspectedComponentView.designer.cs">
+      <DependentUpon>InspectedComponentView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InspectionEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InspectionEdit.designer.cs">
+      <DependentUpon>InspectionEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EInspection.cs" />
+    <Compile Include="EInspectedComponent.cs" />
+    <Compile Include="EOutage.cs" />
+    <Compile Include="EComponent.cs" />
+    <Compile Include="EPipeSchedule.cs" />
+    <Compile Include="PipeScheduleView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PipeScheduleView.designer.cs">
+      <DependentUpon>PipeScheduleView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PipeScheduleEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PipeScheduleEdit.designer.cs">
+      <DependentUpon>PipeScheduleEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EComponentType.cs" />
+    <Compile Include="ESystem.cs" />
+    <Compile Include="EComponentMaterial.cs" />
+    <Compile Include="MaterialTypeEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaterialTypeEdit.designer.cs">
+      <DependentUpon>MaterialTypeEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ECalibrationProcedure.cs" />
+    <Compile Include="ECouplantType.cs" />
+    <Compile Include="EGridProcedure.cs" />
+    <Compile Include="EInspector.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="MaterialTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaterialTypeView.designer.cs">
+      <DependentUpon>MaterialTypeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutageEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutageEdit.designer.cs">
+      <DependentUpon>OutageEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LineEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LineEdit.designer.cs">
+      <DependentUpon>LineEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SystemEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SystemEdit.designer.cs">
+      <DependentUpon>SystemEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TickCounter.cs" />
+    <Compile Include="TransparencySelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TransparencySelector.designer.cs">
+      <DependentUpon>TransparencySelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeNodeEntity.cs">
+    </Compile>
+    <Compile Include="UnitEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitEdit.designer.cs">
+      <DependentUpon>UnitEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerEdit.designer.cs">
+      <DependentUpon>CustomerEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ECustomer.cs" />
+    <Compile Include="ELine.cs" />
+    <Compile Include="ESite.cs" />
+    <Compile Include="EUnit.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AppMain.resx">
+      <DependentUpon>AppMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComponentEdit.resx">
+      <DependentUpon>ComponentEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComponentImporter.resx">
+      <DependentUpon>ComponentImporter.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComponentListing.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ComponentListing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComponentTypeEdit.resx">
+      <DependentUpon>ComponentTypeEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComponentTypeView.resx">
+      <DependentUpon>ComponentTypeView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComponentView.resx">
+      <DependentUpon>ComponentView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalBlockEdit.resx">
+      <DependentUpon>CalBlockEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalBlockView.resx">
+      <DependentUpon>CalBlockView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalibrationProcedureEdit.resx">
+      <DependentUpon>CalibrationProcedureEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalibrationProcedureView.resx">
+      <DependentUpon>CalibrationProcedureView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdditionalMeasurementEdit.resx">
+      <DependentUpon>AdditionalMeasurementEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActivationKeyGenerator.resx">
+      <DependentUpon>ActivationKeyGenerator.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActivationKeyInputBox.resx">
+      <DependentUpon>ActivationKeyInputBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutageChangesViewer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OutageChangesViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preferences_General.resx">
+      <DependentUpon>Preferences_General.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComponentListing.rdlc" />
+    <EmbeddedResource Include="StatusReport.rdlc" />
+    <EmbeddedResource Include="SystemView.resx">
+      <DependentUpon>SystemView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LineView.resx">
+      <DependentUpon>LineView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerConfigView.resx">
+      <DependentUpon>CustomerConfigView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preferences_Master.resx">
+      <DependentUpon>Preferences_Master.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportDefinitionImporter.resx">
+      <DependentUpon>ReportDefinitionImporter.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpecialCalParamEdit.resx">
+      <DependentUpon>SpecialCalParamEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpecialCalParamView.resx">
+      <DependentUpon>SpecialCalParamView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphicEdit.resx">
+      <DependentUpon>GraphicEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridEdit.resx">
+      <DependentUpon>GridEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreviewGraphic.resx">
+      <DependentUpon>PreviewGraphic.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RadialLocationView.resx">
+      <DependentUpon>RadialLocationView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RadialLocationEdit.resx">
+      <DependentUpon>RadialLocationEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridSizeView.resx">
+      <DependentUpon>GridSizeView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridSizeEdit.resx">
+      <DependentUpon>GridSizeEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InspectionPeriodEdit.resx">
+      <DependentUpon>InspectionPeriodEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CouplantTypeView.resx">
+      <DependentUpon>CouplantTypeView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CouplantTypeEdit.resx">
+      <DependentUpon>CouplantTypeEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridProcedureView.resx">
+      <DependentUpon>GridProcedureView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridProcedureEdit.resx">
+      <DependentUpon>GridProcedureEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportValidator.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReportValidator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatusReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>StatusReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThermoView.resx">
+      <DependentUpon>ThermoView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThermoEdit.resx">
+      <DependentUpon>ThermoEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MeterView.resx">
+      <DependentUpon>MeterView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MeterEdit.resx">
+      <DependentUpon>MeterEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InspectorView.resx">
+      <DependentUpon>InspectorView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InspectorEdit.resx">
+      <DependentUpon>InspectorEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KitView.resx">
+      <DependentUpon>KitView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KitEdit.resx">
+      <DependentUpon>KitEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DucerView.resx">
+      <DependentUpon>DucerView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DucerEdit.resx">
+      <DependentUpon>DucerEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MeterModelView.resx">
+      <DependentUpon>MeterModelView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MeterModelEdit.resx">
+      <DependentUpon>MeterModelEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DucerModelView.resx">
+      <DependentUpon>DucerModelView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DucerModelEdit.resx">
+      <DependentUpon>DucerModelEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DsetEdit.resx">
+      <DependentUpon>DsetEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InspectedComponentEdit.resx">
+      <DependentUpon>InspectedComponentEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InspectedComponentView.resx">
+      <DependentUpon>InspectedComponentView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InspectionEdit.resx">
+      <DependentUpon>InspectionEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PipeScheduleView.resx">
+      <DependentUpon>PipeScheduleView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PipeScheduleEdit.resx">
+      <DependentUpon>PipeScheduleEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaterialTypeEdit.resx">
+      <DependentUpon>MaterialTypeEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaterialTypeView.resx">
+      <DependentUpon>MaterialTypeView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutageEdit.resx">
+      <DependentUpon>OutageEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LineEdit.resx">
+      <DependentUpon>LineEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SystemEdit.resx">
+      <DependentUpon>SystemEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TransparencySelector.resx">
+      <DependentUpon>TransparencySelector.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitEdit.resx">
+      <DependentUpon>UnitEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerEdit.resx">
+      <DependentUpon>CustomerEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SiteEdit.resx">
+      <DependentUpon>SiteEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <Content Include="Factotum.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Factotum16.ico" />
+    <Content Include="Factotum.sdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="ComponentListingDataSet.xsc">
+      <DependentUpon>ComponentListingDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ComponentListingDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ComponentListingDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ComponentListingDataSet.xss">
+      <DependentUpon>ComponentListingDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="EULA for Factotum rev2.rtf" />
+    <None Include="Images\vendor_logo.jpg" />
+    <None Include="Images\orientation-cw.gif" />
+    <None Include="Images\orientation-ccw.gif" />
+    <Content Include="FactotumMaster.ico" />
+    <Content Include="Interop.xlsgen.dll">
+    </Content>
+    <Content Include="Move.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\PrintPreview.bmp" />
+    <None Include="Resources\vendor_logo.jpg" />
+    <None Include="Resources\vendor_logo1.jpg" />
+    <None Include="Resources\vendor_logo0.jpg" />
+    <Content Include="Stretch.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="StatusReportDataSet.xsc">
+      <DependentUpon>StatusReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="StatusReportDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StatusReportDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="StatusReportDataSet.xss">
+      <DependentUpon>StatusReportDataSet.xsd</DependentUpon>
+    </None>
+    <Content Include="xlsgen.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="xlsgen.license.lic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TextBoxWithUndo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SiteEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SiteEdit.designer.cs">
+      <DependentUpon>SiteEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="xlsgen">
+      <Guid>{2BDEA919-2489-4ED2-8F55-C12D74DAD9B8}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
