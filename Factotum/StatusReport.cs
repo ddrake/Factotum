@@ -149,7 +149,7 @@ namespace Factotum
 			if (Globals.cnn.State != ConnectionState.Open) Globals.cnn.Open();
 			this.TmpStatusReportTableAdapter.Fill(this.StatusReportDataSet.TmpStatusReport);
 			updateFilter();
-			rvStatusReport.Print +=new CancelEventHandler(rvStatusReport_Print);
+			rvStatusReport.Print +=new ReportPrintEventHandler(rvStatusReport_Print);
 			this.rvStatusReport.RefreshReport();
 		}
 

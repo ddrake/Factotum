@@ -99,7 +99,7 @@ namespace Factotum
 
 		private FontFamily GetFontFamilyForName(string name)
 		{
-			FontFamily[] families = FontFamily.GetFamilies(Graphics.FromHwnd(this.Handle));
+			FontFamily[] families = FontFamily.Families;
 			foreach (FontFamily family in families)
 			{
 				if (family.Name == name) return family;
