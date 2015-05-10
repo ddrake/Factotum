@@ -1,3 +1,0 @@
-Increment the minor revision number.
-Create a tag in SVN that references this revision number.
-Check that the status report is finding the database ok.

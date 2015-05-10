@@ -4,5 +4,7 @@ CleanupAppData/obj/*
 CleanupAppData/bin/*
 Factotum/obj/*
 Factotum/bin/*
-Setup/Debug/*
-Setup/Release/*
+Setup/bin
+Setup/obj
+Factotum/xlsgen.license.lic
+Factotum/FAC.~m2
