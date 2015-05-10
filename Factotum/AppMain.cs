@@ -643,27 +643,6 @@ namespace Factotum
 			}
 		}
 
-		private void enterANewActivationKeyToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			ActivationKeyInputBox frm = new ActivationKeyInputBox();
-			if (frm.ShowDialog() != DialogResult.OK) return;
-			
-			bool isFuture;
-			if (ActivationKey.IsKeyValid(frm.newKey, out isFuture))
-			{
-				// Update the activation key and clear the IsInactivatedFlag
-				Globals.UpdateActivationKey(frm.newKey);
-				MessageBox.Show("Activation Succeeded!", "Factotum");
-			}
-			else
-			{
-				MessageBox.Show((isFuture ? 
-					"The Activation Period for that Key has not Started Yet." : 
-					"Invalid Activation Key"),"Factotum");
-			}
-
-		}
-
 		private void linesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			LineView frm = new LineView();

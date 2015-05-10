@@ -207,7 +207,7 @@ namespace Factotum
             // 
             this.systemMasterPrefsToolStripMenuItem.Name = "systemMasterPrefsToolStripMenuItem";
             this.systemMasterPrefsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.systemMasterPrefsToolStripMenuItem.Text = "System Master";
+            this.systemMasterPrefsToolStripMenuItem.Text = "Master Database";
             this.systemMasterPrefsToolStripMenuItem.Click += new System.EventHandler(this.testConfigurationToolStripMenuItem_Click);
             // 
             // generalToolStripMenuItem

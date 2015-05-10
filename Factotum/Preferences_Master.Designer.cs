@@ -120,7 +120,7 @@ namespace Factotum
 			this.Controls.Add(this.cboCurrentOutage);
 			this.MinimumSize = new System.Drawing.Size(625, 134);
 			this.Name = "Preferences_Master";
-			this.Text = "System Master Preferences";
+			this.Text = "Master Database Preferences";
 			this.Load += new System.EventHandler(this.MasterPreferences_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();

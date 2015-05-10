@@ -111,18 +111,7 @@ namespace Factotum
 				rdr.Close();
 			}
 			else CompatibleDBVersion = 3; // I Don't think it matters what this is set to.
-		}
-
-		public static void UpdateActivationKey(string newKey)
-		{
-			if (cnn.State != ConnectionState.Open) cnn.Open();
-			SqlCeCommand cmd;
-			cmd = cnn.CreateCommand();
-			cmd.CommandText =
-				@"Update Globals set SiteActivationKey = @p0, IsInactivatedDB = 0";
-			cmd.Parameters.Add("@p0", newKey);
-			cmd.ExecuteNonQuery();
-
+			OnDatabaseChanged();
 		}
 
 		public static void ConvertCurrentDbToMaster()
@@ -147,7 +136,8 @@ namespace Factotum
 			cmd.CommandText =
 				@"Update Globals set IsMasterDB = 1, IsNewDB = 0";
 			int recordsAffected = cmd.ExecuteNonQuery();
-
+			
+			ReadDatabaseInfo();
 		}
 
 		public static void Amputate_outageSpecific()
