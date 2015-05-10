@@ -40,7 +40,6 @@ namespace Factotum
 		{
 			SetControlValues();
 			this.Text = newRecord ? "New System" : "Edit System";
-			btnOK.Enabled = Globals.ActivationOK;
 			ESite.Changed += new EventHandler<EntityChangedEventArgs>(ESiteOrEUnit_Changed);
 			EUnit.Changed += new EventHandler<EntityChangedEventArgs>(ESiteOrEUnit_Changed);
 		}

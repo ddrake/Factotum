@@ -42,7 +42,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.Text = newRecord ? "New Component Type" : "Edit Component Type";
-			this.btnOK.Enabled = Globals.ActivationOK;
 		}
 
 		//---------------------------------------------------------

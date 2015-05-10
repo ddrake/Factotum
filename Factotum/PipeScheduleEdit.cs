@@ -40,7 +40,6 @@ namespace Factotum
 		{
 			SetControlValues();
 			this.Text = newRecord ? "New Pipe Schedule Item" : "Edit Pipe Schedule Item";
-			btnOK.Enabled = Globals.ActivationOK;
 		}
 
 		//---------------------------------------------------------

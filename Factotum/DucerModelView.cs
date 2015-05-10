@@ -26,8 +26,6 @@ namespace Factotum
 		// Take care of settings that are not easily managed in the designer.
 		private void InitializeControls() 
 		{
-			btnAdd.Enabled = Globals.ActivationOK;
-			btnDelete.Enabled = Globals.ActivationOK;
 		}
 
 		// Set the status filter to show active tools by default

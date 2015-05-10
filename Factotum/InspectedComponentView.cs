@@ -45,8 +45,6 @@ namespace Factotum
 			cboReviewer.ValueMember = "ID";
 			cboReviewer.SelectedIndex = 0;
 
-			btnAdd.Enabled = Globals.ActivationOK;
-			btnDelete.Enabled = Globals.ActivationOK;
 		}
 
 		private void UpdateReviewersComboSource()

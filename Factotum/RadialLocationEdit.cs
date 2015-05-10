@@ -41,7 +41,6 @@ namespace Factotum
 		{
 			SetControlValues();
 			this.Text = newRecord ? "New Radial Location" : "Edit Radial Location";
-			btnOK.Enabled = Globals.ActivationOK;
 		}
 
 		//---------------------------------------------------------

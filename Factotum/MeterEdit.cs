@@ -54,7 +54,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.Text = newRecord ? "New Meter" : "Edit Meter";
-			this.btnOK.Enabled = Globals.ActivationOK;
 			EMeterModel.Changed += new EventHandler<EntityChangedEventArgs>(EMeterModel_Changed);
 			EKit.Changed += new EventHandler<EntityChangedEventArgs>(EKit_Changed);
 		}

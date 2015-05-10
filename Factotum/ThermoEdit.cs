@@ -46,7 +46,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.Text = newRecord ? "New Thermometer" : "Edit Thermometer";
-			this.btnOK.Enabled = Globals.ActivationOK;
 			EKit.Changed += new EventHandler<EntityChangedEventArgs>(EKit_Changed);
 		}
 

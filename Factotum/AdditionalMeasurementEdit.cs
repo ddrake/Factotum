@@ -48,7 +48,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.Text = newRecord ? "New Additional Measurement" : "Edit Additional Measurement";
-			this.btnOK.Enabled = Globals.ActivationOK;
         }
 
 		//---------------------------------------------------------

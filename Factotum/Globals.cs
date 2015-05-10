@@ -9,18 +9,11 @@ using System.Reflection;
 
 namespace Factotum
 {
-	class Globals
+	static class Globals
 	{
         public static string dbName = "Factotum.sdf";
-        public static string dbPassword = "omigod";
-        public static int BlacklistCheckRetries = 0;
-		// Make the retries sufficient, but not excessive.  Don't want to give an unauthorized
-		// user time to do much...
-		public static int BlacklistCheckMaxRetries = 5;
-		public static Guid? CurrentOutageID;
 
-		// This flag is true if EITHER we're the system master, OR the Activation key is in range
-		public static bool ActivationOK;
+		public static Guid? CurrentOutageID;
 
 		// Beta versions show "Beta" and build date in main form title
 		public static bool IsBeta = false;
@@ -33,16 +26,8 @@ namespace Factotum
 		public static int CompatibleDBVersion;
 		public static bool IsMasterDB;
 		public static bool IsNewDB;
-		public static bool IsInactivatedDB;
-
-		// Whether the current machine is the system master.
-		public static bool IsSystemMaster;
-
-		// We may need to play with this value.
-		public static int maxUnverifiedSessions = 3;
-		private static DateTime? masterRegCheckedOn = null;
-		public static string SiteActivationKey = null;
-
+		public static string dbPassword = "omigod";
+		
 		private static string versionString;
 
 		public static string VersionString
@@ -58,52 +43,6 @@ namespace Factotum
 			}
 		}
 	
-		public static DateTime? MasterRegCheckedOn
-		{
-			get
-			{
-				return masterRegCheckedOn;
-			}
-			set
-			{
-				if (value == masterRegCheckedOn) return;
-
-				SqlCeCommand cmd = cnn.CreateCommand();
-				cmd.CommandText = "Update Globals set MasterRegCheckedOn = @p0";
-				if (value == null)
-					cmd.Parameters.Add("@p0", DBNull.Value);
-				else
-					cmd.Parameters.Add("@p0", (DateTime)value);
-
-				cmd.ExecuteNonQuery();
-				masterRegCheckedOn = value;
-			}
-		}
-
-		private static int unverifiedSessionCount;
-		public static int UnverifiedSessionCount
-		{
-			get { return unverifiedSessionCount; }
-			set
-			{
-				if (value == unverifiedSessionCount) return;
-
-				SqlCeCommand cmd = cnn.CreateCommand();
-				cmd.CommandText = "Update Globals set UnverifiedSessionCount = @p0";
-				cmd.Parameters.Add("@p0", value);
-				cmd.ExecuteNonQuery();
-				unverifiedSessionCount = value;
-			}
-		}
-		// Broadcast changes to the System Master status.
-		public static event EventHandler MasterStatusChanged;
-		public static void OnMasterStatusChanged()
-		{
-			// Copy to a temporary variable to be thread-safe.
-			EventHandler temp = MasterStatusChanged;
-			if (temp != null)
-				temp(new object(), new EventArgs());
-		}
 
 		// Broadcast changes to the current database.
 		public static event EventHandler DatabaseChanged;
@@ -125,29 +64,6 @@ namespace Factotum
 			EventHandler temp = CurrentOutageChanged;
 			if (temp != null)
 				temp(new object(), new EventArgs());
-		}
-
-		// Check the machine's system master status and set a global flag
-		public static void ActOnSystemMasterStatus(string message, out bool exitNow)
-		{
-			bool prevSystemMaster = UserSettings.sets.IsPreviousMaster;
-
-			// Update and save the user setting
-			UserSettings.sets.IsPreviousMaster = Globals.IsSystemMaster;
-			UserSettings.Save();
-			exitNow = false;
-
-			if (!Globals.IsSystemMaster && Globals.IsMasterDB)
-			{
-				// We just lost our master status, let the user know what the problem is.
-				MessageBox.Show(message,"Factotum");
-				// If the current database is a master database, they won't be able to work with it, so
-				// tell them they need to re-register the system master and close the application.
-				// Yeah, tough luck...
-				MessageBox.Show("The current data file cannot be used by a machine that is not the System Master PC.\n" +
-				"The application must close.  Use the \"System Master Registration Utility\" to Re-Register", "Factotum");
-				exitNow = true;
-			}
 		}
 
 		// Initialize and open the connection to the database Factotum.sdf in the app dir
@@ -176,12 +92,8 @@ namespace Factotum
 			if (rdr.Read())
 			{
 				DatabaseVersion = (int)rdr["DatabaseVersion"];
-				masterRegCheckedOn = (DateTime?)DowUtils.Util.NullForDbNull(rdr["MasterRegCheckedOn"]);
-				unverifiedSessionCount = (int)rdr["UnverifiedSessionCount"];
-				SiteActivationKey = (string)DowUtils.Util.NullForDbNull(rdr["SiteActivationKey"]);
 				IsMasterDB = (bool)rdr["IsMasterDB"];
 				IsNewDB = (bool)rdr["IsNewDB"];
-				IsInactivatedDB = (bool)rdr["IsInactivatedDB"];
 			}
 			rdr.Close();
 
@@ -203,7 +115,6 @@ namespace Factotum
 
 		public static void UpdateActivationKey(string newKey)
 		{
-			SqlCeConnection cnn = Globals.cnn;
 			if (cnn.State != ConnectionState.Open) cnn.Open();
 			SqlCeCommand cmd;
 			cmd = cnn.CreateCommand();
@@ -212,40 +123,6 @@ namespace Factotum
 			cmd.Parameters.Add("@p0", newKey);
 			cmd.ExecuteNonQuery();
 
-			ActOnDatabaseInfo();
-		}
-
-
-		public static void ActOnDatabaseInfo()
-		{
-			bool isFuture = false;
-
-			// This could happen if someone double-clicked on a master file when they're not the
-			// system master.  There won't be any activation key to check, so the logic below won't
-			// work.  We'll shut them down later in the Open file logic...
-			if (!Globals.IsSystemMaster && Globals.IsMasterDB)
-			{
-				ActivationOK = false;
-				return;
-			}
-
-			ActivationOK = Globals.IsNewDB || Globals.IsSystemMaster ||
-					(!IsInactivatedDB && ActivationKey.IsKeyValid(SiteActivationKey, out isFuture));
-
-			if (!ActivationOK && !isFuture && !IsInactivatedDB)
-			{
-				// If the database has been opened for the first time since its activation
-				// period expired, set its IsInactivatedDB so that setting the clock back won't help.
-				SqlCeConnection cnn = Globals.cnn;
-				if (cnn.State != ConnectionState.Open) cnn.Open();
-				SqlCeCommand cmd;
-				cmd = cnn.CreateCommand();
-				cmd.CommandText =
-					@"Update Globals set IsInactivatedDB = 1";
-				cmd.ExecuteNonQuery();
-			}
-			// Notify any listeners that we have new database info...
-			OnDatabaseChanged();
 		}
 
 		public static void ConvertCurrentDbToMaster()
@@ -264,7 +141,6 @@ namespace Factotum
 			
 			// Set the dbtype to Master
 			// Also, in case this is a new database, reset the IsNewDB flag.
-			SqlCeConnection cnn = Globals.cnn;
 			if (cnn.State != ConnectionState.Open) cnn.Open();
 			SqlCeCommand cmd;
 			cmd = cnn.CreateCommand();
@@ -272,13 +148,10 @@ namespace Factotum
 				@"Update Globals set IsMasterDB = 1, IsNewDB = 0";
 			int recordsAffected = cmd.ExecuteNonQuery();
 
-			ReadDatabaseInfo();
-			ActOnDatabaseInfo();
 		}
 
 		public static void Amputate_outageSpecific()
 		{
-			SqlCeConnection cnn = Globals.cnn;
 			SqlCeCommand cmd;
 			cmd = cnn.CreateCommand();
 			cmd.CommandText = "Delete from GridCells";
@@ -339,11 +212,6 @@ namespace Factotum
 				// Upgrade the database to the currently supported version 
 				DatabaseUpdater updater = new DatabaseUpdater(DatabaseVersion, Globals.cnn);
 				updater.UpdateToCurrent();
-			}
-			else if (IsMasterDB && !IsSystemMaster)
-			{
-				message = "The current data file can only be opened by the system master";
-				return false;
 			}
 			return true;
 		}

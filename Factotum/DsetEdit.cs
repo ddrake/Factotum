@@ -128,22 +128,6 @@ namespace Factotum
 
 			SetControlValues(newRecord);
 			this.Text = newRecord ? "New Dataset" : "Edit Dataset";
-			this.btnOK.Enabled = Globals.ActivationOK;
-			this.btnAddInspPeriod.Enabled = Globals.ActivationOK;
-			this.btnAddNonGridMeas.Enabled = Globals.ActivationOK;
-			this.btnAddSaveSpecialCalItem.Enabled = Globals.ActivationOK;
-			this.btnApplyColShift.Enabled = Globals.ActivationOK;
-			this.btnApplyDeleteCols.Enabled = Globals.ActivationOK;
-			this.btnApplyDeleteRows.Enabled = Globals.ActivationOK;
-			this.btnApplyReverseCols.Enabled = Globals.ActivationOK;
-			this.btnApplyReverseRows.Enabled = Globals.ActivationOK;
-			this.btnApplyRowShift.Enabled = Globals.ActivationOK;
-			this.btnApplyTranspose.Enabled = Globals.ActivationOK;
-			this.btnDelete.Enabled = Globals.ActivationOK;
-			this.btnDeleteInspPeriod.Enabled = Globals.ActivationOK;
-			this.btnDeleteNonGridMeas.Enabled = Globals.ActivationOK;
-			this.btnDeleteSpecialCalItem.Enabled = Globals.ActivationOK;
-			this.btnSelectFile.Enabled = Globals.ActivationOK;
 
 			statsNeedRefresh = true;
 		}
@@ -376,10 +360,7 @@ namespace Factotum
 		{
 			// Make sure there's a row selected
 			if (dgvNonGridMeasurements.SelectedRows.Count != 1) return;
-			if (Globals.ActivationOK)
-			{
-				if (!performSilentSave()) return;
-			}
+			if (!performSilentSave()) return;
 
 			Guid? currentEditItem = (Guid?)(dgvNonGridMeasurements.SelectedRows[0].Cells["ID"].Value);
 			// First check to see if an instance of the form set to the selected ID already exists
@@ -440,10 +421,7 @@ namespace Factotum
 		{
 			// Make sure there's a row selected
 			if (dgvInspPeriods.SelectedRows.Count != 1) return;
-			if (Globals.ActivationOK)
-			{
-				if (!performSilentSave()) return;
-			}
+			if (!performSilentSave()) return;
 			Guid? currentEditItem = (Guid?)(dgvInspPeriods.SelectedRows[0].Cells["ID"].Value);
 			// First check to see if an instance of the form set to the selected ID already exists
 			if (!Globals.CanActivateForm(this, "InspectionPeriodEdit", currentEditItem))
@@ -1528,13 +1506,10 @@ namespace Factotum
 		{
 			if (e.TabPage.Name == "SpecialFieldData")
 			{
-				if (Globals.ActivationOK)
+				if (!performSilentSave())
 				{
-					if (!performSilentSave())
-					{
-						e.Cancel = true;
-						return;
-					}
+					e.Cancel = true;
+					return;
 				}
 				if (curSpecialCalValue == null)
 				{

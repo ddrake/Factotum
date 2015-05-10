@@ -57,7 +57,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.Text = newRecord ? "New Kit" : "Edit Kit";
-			btnOK.Enabled = Globals.ActivationOK;
 			EInspector.Changed += new EventHandler<EntityChangedEventArgs>(EInspector_Changed);
 			EMeter.Changed += new EventHandler<EntityChangedEventArgs>(EMeter_Changed);
 			EDucer.Changed += new EventHandler<EntityChangedEventArgs>(EDucer_Changed);

@@ -30,8 +30,6 @@ namespace Factotum
 			cboStatusFilter.SelectedIndex = (int)FilterActiveStatus.ShowActive;
 			cboInOutageFilter.SelectedIndex = Globals.IsMasterDB ?
 				(int)FilterYesNoAll.ShowAll : (int)FilterYesNoAll.Yes;
-			btnAdd.Enabled = Globals.ActivationOK;
-			btnDelete.Enabled = Globals.ActivationOK;
 		}
 
 		// Set the status filter to show active tools by default

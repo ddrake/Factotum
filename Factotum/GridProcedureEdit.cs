@@ -41,7 +41,6 @@ namespace Factotum
 		{
 			SetControlValues();
 			this.Text = newRecord ? "New Grid Procedure" : "Edit Grid Procedure";
-			this.btnOK.Enabled = Globals.ActivationOK;
 		}
 
 		//---------------------------------------------------------

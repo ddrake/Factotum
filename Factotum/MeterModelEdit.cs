@@ -46,7 +46,6 @@ namespace Factotum
 				clbDucerModels.Items.Add(modelName +(isActive ? "" : " (inactive)"), isAssigned);
 			}
 			SetControlValues();
-			this.btnOK.Enabled = Globals.ActivationOK;
 		}
 
 		//---------------------------------------------------------

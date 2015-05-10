@@ -34,8 +34,6 @@ namespace Factotum
 			cboSiteFilter.DisplayMember = "SiteName";
 			cboSiteFilter.ValueMember = "ID";
 			HandleEnablingForPropertySettings();
-			btnAdd.Enabled = Globals.ActivationOK;
-			btnDelete.Enabled = Globals.ActivationOK;
 		}
 
 		// Set the status filter to show active types by default

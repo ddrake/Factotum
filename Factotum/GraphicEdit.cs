@@ -92,7 +92,7 @@ namespace Factotum
 			DisEnableSelectedItemButtons(false);
 			DisEnableZButtons(false);
 			SetControlValues();
-			btnSaveGraphic.Enabled = Globals.ActivationOK && curGraphic.GraphicBgImageFileName != null;
+			btnSaveGraphic.Enabled = curGraphic.GraphicBgImageFileName != null;
 
 		}
 

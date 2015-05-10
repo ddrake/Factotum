@@ -75,11 +75,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.Text = newRecord ? "New Component Report" : "Edit Component Report";
-			this.btnOK.Enabled = Globals.ActivationOK;
-			this.btnAdd.Enabled = Globals.ActivationOK;
-			this.btnDelete.Enabled = Globals.ActivationOK;
-			this.btnMoveDown.Enabled = Globals.ActivationOK;
-			this.btnMoveUp.Enabled = Globals.ActivationOK;
 
 			dgvReportSections.RowHeadersVisible = false;
 			dgvReportSections.AllowUserToResizeRows = false;
@@ -247,10 +242,7 @@ namespace Factotum
 		{
 			// Make sure there's a row selected
 			if (dgvReportSections.SelectedRows.Count != 1) return;
-			if (Globals.ActivationOK)
-			{
-				if (!performSilentSave()) return;
-			}
+			if (!performSilentSave()) return;
 			Guid? currentEditItem = (Guid?)(dgvReportSections.SelectedRows[0].Cells["ID"].Value);
 			// First check to see if an instance of the form set to the selected ID already exists
 			if (!Globals.CanActivateForm(this, "InspectionEdit", currentEditItem))
@@ -274,10 +266,7 @@ namespace Factotum
 
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
-			if (Globals.ActivationOK)
-			{
-				if (!performSilentSave()) return;
-			}
+			if (!performSilentSave()) return;
 			InspectionEdit frm = new InspectionEdit(null, curInspComponent.ID);
 			frm.MdiParent = this.MdiParent;
 			frm.Show();

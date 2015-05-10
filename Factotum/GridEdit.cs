@@ -156,10 +156,7 @@ namespace Factotum
 
 			if	(this.ActiveControl.Parent != this.Sections)
 			{
-				if (Globals.ActivationOK)
-				{
-					if (!performSilentSave()) return;
-				}
+				if (!performSilentSave()) return;
 				curGrid.UpdateSectionInfoVars();
 				// We need to update the stats because the number of mins may change by the new partitioning.
 				GetStats();
@@ -227,7 +224,6 @@ namespace Factotum
 			DisEnableRowTextboxesForComponent();
 			SetControlValues();
 			this.Text = newRecord ? "New Grid" : "Edit Grid";
-			this.btnOK.Enabled = Globals.ActivationOK;
 			if (newRecord)
 			{
 				EOutage curOutage = new EOutage(Globals.CurrentOutageID);
@@ -388,13 +384,10 @@ namespace Factotum
 			{
 				// Update the database with the current dataset assignments to the current grid.
 				// This function will try to perform a silent save if this is a new record
-				if (Globals.ActivationOK)
+				if (!performSilentSave())
 				{
-					if (!performSilentSave())
-					{
-						e.Cancel = true;
-						return;
-					}
+					e.Cancel = true;
+					return;
 				}
 				curGrid.UpdateSectionInfoVars();
 
@@ -848,12 +841,9 @@ namespace Factotum
 		// Update the database with the current dataset assignments to the current grid.
 		private bool UpdateDsetAssignmentsToGrid()
 		{
-			if (Globals.ActivationOK)
+			if (curGrid.ID == null)
 			{
-				if (curGrid.ID == null)
-				{
-					if (!performSilentSave()) return false;
-				}
+				if (!performSilentSave()) return false;
 			}
 			// We need to do these updates after saving because they require a valid Grid ID
 
@@ -1173,10 +1163,7 @@ namespace Factotum
 
         private void btnExportToExcel_Click(object sender, EventArgs e)
         {
-            if (Globals.ActivationOK)
-            {
-                if (!performSilentSave()) return;
-            }
+            if (!performSilentSave()) return;
 
             if (clbDatasets.CheckedItems.Count == 0)
             {

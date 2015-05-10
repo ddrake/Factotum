@@ -47,7 +47,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.Text = newRecord ? "New Component Material Type" : "Edit Component Material Type";
-			this.btnOK.Enabled = Globals.ActivationOK;
 		}
 
 		//---------------------------------------------------------

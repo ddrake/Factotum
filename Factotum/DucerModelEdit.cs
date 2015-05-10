@@ -42,7 +42,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.Text = newRecord ? "New Transducer Model" : "Edit Transducer Model";
-			this.btnOK.Enabled = Globals.ActivationOK;
 		}
 
 		//---------------------------------------------------------

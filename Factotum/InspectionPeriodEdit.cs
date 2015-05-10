@@ -43,7 +43,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.Text = newRecord ? "New Inspection Period" : "Edit Inspection Period";
-			this.btnOK.Enabled = Globals.ActivationOK;
 		}
 
 		//---------------------------------------------------------

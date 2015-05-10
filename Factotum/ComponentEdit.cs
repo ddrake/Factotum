@@ -81,7 +81,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.Text = newRecord ? "New Component" : "Edit Component";
-			this.btnOK.Enabled = Globals.ActivationOK;
 			ESystem.Changed += new EventHandler<EntityChangedEventArgs>(ESystem_Changed);
 			ELine.Changed += new EventHandler<EntityChangedEventArgs>(ELine_Changed);
 			EComponentType.Changed += new EventHandler<EntityChangedEventArgs>(EComponentType_Changed);

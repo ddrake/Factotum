@@ -41,7 +41,6 @@ namespace Factotum
 		{
 			SetControlValues();
 			this.Text = newRecord ? "New Calibration Procedure" : "Edit Calibration Procedure";
-			this.btnOK.Enabled = Globals.ActivationOK;
 		}
 
 		//---------------------------------------------------------

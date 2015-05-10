@@ -40,8 +40,6 @@ namespace Factotum
             this.importOutageConfigurationDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewChangesFromOutageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.enterNewActivationKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.generateANewActivationKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restoreAutobackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.convertToMasterDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -169,27 +167,11 @@ namespace Factotum
             // utilitiesToolStripMenuItem
             // 
             this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enterNewActivationKeyToolStripMenuItem,
-            this.generateANewActivationKeyToolStripMenuItem,
             this.restoreAutobackupToolStripMenuItem,
             this.convertToMasterDBToolStripMenuItem});
             this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
             this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.utilitiesToolStripMenuItem.Text = "&Utilities";
-            // 
-            // enterNewActivationKeyToolStripMenuItem
-            // 
-            this.enterNewActivationKeyToolStripMenuItem.Name = "enterNewActivationKeyToolStripMenuItem";
-            this.enterNewActivationKeyToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
-            this.enterNewActivationKeyToolStripMenuItem.Text = "&Enter a new Activation Key";
-            this.enterNewActivationKeyToolStripMenuItem.Click += new System.EventHandler(this.enterANewActivationKeyToolStripMenuItem_Click);
-            // 
-            // generateANewActivationKeyToolStripMenuItem
-            // 
-            this.generateANewActivationKeyToolStripMenuItem.Name = "generateANewActivationKeyToolStripMenuItem";
-            this.generateANewActivationKeyToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
-            this.generateANewActivationKeyToolStripMenuItem.Text = "&Generate a new Activation Key";
-            this.generateANewActivationKeyToolStripMenuItem.Click += new System.EventHandler(this.generateANewActivationKeyToolStripMenuItem_Click);
             // 
             // restoreAutobackupToolStripMenuItem
             // 
@@ -520,11 +502,9 @@ namespace Factotum
 		private System.Windows.Forms.ToolStripMenuItem utilitiesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem convertToMasterDBToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem generalToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem enterNewActivationKeyToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem linesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem systemsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewChangesFromOutageToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem generateANewActivationKeyToolStripMenuItem;
 		private System.Windows.Forms.Timer tmrBackup;
 		private System.Windows.Forms.ToolStripMenuItem restoreAutobackupToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;

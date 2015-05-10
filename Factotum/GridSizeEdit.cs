@@ -41,7 +41,6 @@ namespace Factotum
 		{
 			SetControlValues();
 			this.Text = newRecord ? "New Grid Size" : "Edit Grid Size";
-			this.btnOK.Enabled = Globals.ActivationOK;
 		}
 
 		//---------------------------------------------------------

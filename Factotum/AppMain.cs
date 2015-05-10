@@ -49,11 +49,8 @@ namespace Factotum
 			// and we need to back up.
 			Globals.ReadDatabaseInfo();
 
-			// Check whether or not we're the system master and get a message about the situation.
-			Globals.IsSystemMaster = true;
-
-			// It's startup of a fresh install and the machine is already registered as the master
-			if (Globals.IsNewDB && Globals.IsSystemMaster)
+			// It's startup of a fresh install
+			if (Globals.IsNewDB)
 			{
 				// No need to back up first.
 				Globals.ConvertCurrentDbToMaster();
@@ -85,47 +82,6 @@ namespace Factotum
 			// The OpenDatabaseFile method will take care of getting and acting on the
 			// new database info.
 
-			// Depending on the current database type and the machine's master status,
-			// we may need to exit the application entirely.
-			if (!Globals.IsNewDB || Globals.IsSystemMaster)
-			{
-				// Now that we've acted on the system master status, we can act on the database info.
-				Globals.ActOnDatabaseInfo();
-			}
-
-			if (Globals.IsNewDB && !Globals.IsSystemMaster && !isOpenedWithFile)
-			{
-				// If it's a fresh install to a non-master machine, disable all menu options 
-				// except File/Open and show the File Open dialog.
-				string filePathToOpen = null;
-				// Don't need to prompt the user about backing up.  Do it silently to temp file.
-				if (SelectFileToOpen(out filePathToOpen)) handleFileOpenRequest(filePathToOpen, false);
-			}
-
-			// If we're not the master machine and the database activation has expired, 
-			// and it's not a new database -- give a friendly message.  'You can't make changes'
-			if (!Globals.IsSystemMaster && !Globals.ActivationOK && !Globals.IsNewDB)
-			{
-				// Check if it's in the future..
-				bool isFuture = false;
-				ActivationKey.IsKeyValid(Globals.SiteActivationKey, out isFuture);
-				if (isFuture)
-				{
-					MessageBox.Show("The activation period for the current Outage Data File\n" +
-						"has not begun yet.  It can be viewed, but not modified.\n" +
-						"If it is necessary to make changes to this data,\n" +
-						"you should request a new activation key from\n" +
-						"someone with access to the System Master PC", "Factotum");
-				}
-				else
-				{
-					MessageBox.Show("The current Outage Data File is inactive\n" +
-						"It can be viewed, but not modified.\n" +
-						"If it is necessary to make changes to this data,\n" +
-						"you should request a new activation key from\n" + 
-						"someone with access to the System Master PC", "Factotum");
-				}
-			}
 
 			// Wire up these handlers for keeping the caption and menus refreshed if the user
 			// opens a different database later.
@@ -139,15 +95,14 @@ namespace Factotum
 		private void UpdateFormCaption()
 		{
 			this.Text = "Factotum " + Globals.VersionString;
-			string machine = Globals.IsSystemMaster ? " - System Master PC" : "";
-			string database = Globals.IsSystemMaster ? (Globals.IsMasterDB ? " - Master Data File - " : " - Outage Data File - ") : "";
+			string database = Globals.IsMasterDB ? " - Master Data File - " : " - Outage Data File - ";
 			
 			string outage;
 			if (Globals.CurrentOutageID != null)
 				outage = "Current Outage: " + new EOutage(Globals.CurrentOutageID).OutageName;
 			else
 				outage = "No Current Outage";
-			this.Text += machine + database + " (" + outage + ")";
+			this.Text += database + " (" + outage + ")";
 		}
 
 		void Globals_CurrentOutageChanged(object sender, EventArgs e)
@@ -164,40 +119,33 @@ namespace Factotum
 
 		public void handleMenuEnabling()
 		{
-			bool masterMach = Globals.IsSystemMaster;
 			bool masterDB = Globals.IsMasterDB;
-			bool nonMasterNewDB = (!Globals.IsSystemMaster && Globals.IsNewDB);
-			bool inactiveDB = !Globals.ActivationOK;
+			bool newDB = Globals.IsNewDB;
+			//bool inactiveDB = !Globals.ActivationOK;
 			bool outageOK = Globals.CurrentOutageID != null;
 			this.componentReportToolStripMenuItem.Visible = !masterDB;
 			this.importComponentReportDefinitionToolStripMenuItem.Visible = !masterDB;
 			this.importOutageConfigurationDataToolStripMenuItem.Visible = masterDB;
 			this.customerToolStripMenuItem.Visible = masterDB;
 			this.toolKitsToolStripMenuItem.Visible = !masterDB;
-			this.convertToMasterDBToolStripMenuItem.Visible = masterMach;
-			this.enterNewActivationKeyToolStripMenuItem.Visible = !masterMach;
-			this.generateANewActivationKeyToolStripMenuItem.Visible = masterMach;
-			this.systemMasterPrefsToolStripMenuItem.Visible = masterMach;
 			this.viewChangesFromOutageToolStripMenuItem.Visible = masterDB;
 
-			this.convertToMasterDBToolStripMenuItem.Enabled = !masterDB && !nonMasterNewDB;
-			this.enterNewActivationKeyToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.importOutageConfigurationDataToolStripMenuItem.Enabled = masterMach && !nonMasterNewDB;
-			this.equipmentToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.proceduresToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.componentMaterialsToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.componentsToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.componentTypesToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.importToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.outageToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.componentReportToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.utilitiesToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.siteConfigurationToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.preferencesToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.exportToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.inspectorsToolStripMenuItem.Enabled = !nonMasterNewDB;
-			this.ImportComponentsToolStripMenuItem.Enabled = outageOK && !inactiveDB;
-			this.importComponentReportDefinitionToolStripMenuItem.Enabled = !inactiveDB;
+			this.convertToMasterDBToolStripMenuItem.Enabled = !masterDB && !newDB;
+			this.importOutageConfigurationDataToolStripMenuItem.Enabled = !newDB;
+			this.equipmentToolStripMenuItem.Enabled = !newDB;
+			this.proceduresToolStripMenuItem.Enabled = !newDB;
+			this.componentMaterialsToolStripMenuItem.Enabled = !newDB;
+			this.componentsToolStripMenuItem.Enabled = !newDB;
+			this.componentTypesToolStripMenuItem.Enabled = !newDB;
+			this.importToolStripMenuItem.Enabled = !newDB;
+			this.outageToolStripMenuItem.Enabled = !newDB;
+			this.componentReportToolStripMenuItem.Enabled = !newDB;
+			this.utilitiesToolStripMenuItem.Enabled = !newDB;
+			this.siteConfigurationToolStripMenuItem.Enabled = !newDB;
+			this.preferencesToolStripMenuItem.Enabled = !newDB;
+			this.exportToolStripMenuItem.Enabled = !newDB;
+			this.inspectorsToolStripMenuItem.Enabled = !newDB;
+			this.ImportComponentsToolStripMenuItem.Enabled = outageOK;
 			this.currentOutageToolStripMenuItem.Enabled = outageOK;
 
 		}
@@ -446,7 +394,6 @@ namespace Factotum
 				File.Copy(backupPath, Globals.FactotumDatabaseFilePath, true);
 				if (Globals.cnn.State != ConnectionState.Open) Globals.cnn.Open();
 				Globals.ReadDatabaseInfo();
-				Globals.ActOnDatabaseInfo();
 				MessageBox.Show(message + "\nFile Open Operation was Cancelled", "Factotum: Cancelled File Open");
 				return false;
 			}
@@ -457,11 +404,9 @@ namespace Factotum
 		{
 			filePath = null;
 			openFileDialog1.InitialDirectory = Globals.FactotumDataFolder;
-			openFileDialog1.Filter = (Globals.IsSystemMaster ?
-				"All Factotum Data Files *.mfac, *.ofac|*.mfac;*.ofac|Factotum Master Data Files *.mfac|*.mfac|Factotum Outage Data Files *.ofac|*.ofac" :
-				"Factotum Outage Data Files *.ofac|*.ofac");
+			openFileDialog1.Filter = "All Factotum Data Files *.mfac, *.ofac|*.mfac;*.ofac|Factotum Master Data Files *.mfac|*.mfac|Factotum Outage Data Files *.ofac|*.ofac";
 			openFileDialog1.Title = "Select a Data File to Open";
-			openFileDialog1.DefaultExt = (Globals.IsSystemMaster ? ".mfac" : ".ofac");
+			openFileDialog1.DefaultExt = ".ofac";
 			DialogResult rslt = openFileDialog1.ShowDialog();
 			filePath = openFileDialog1.FileName;
 			return (rslt == DialogResult.OK);
@@ -509,12 +454,6 @@ namespace Factotum
 				return false;
 			}
 			Globals.ReadDatabaseInfo();
-			Globals.ActOnDatabaseInfo();
-			if (!Globals.IsSystemMaster && Globals.IsMasterDB)
-			{
-				MessageBox.Show("The selected file is a Master Data File.  It can only be opened by the System Master PC.", "Factotum");
-				return false;
-			}
 			if (!Globals.IsDatabaseOk(out message))
 			{
 				return false;

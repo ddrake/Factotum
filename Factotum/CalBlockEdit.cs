@@ -59,7 +59,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.Text = newRecord ? "New Calibration Block" : "Edit Calibration Block";
-			this.btnOK.Enabled = Globals.ActivationOK;
 			EKit.Changed += new EventHandler<EntityChangedEventArgs>(EKit_Changed);
 		}
 

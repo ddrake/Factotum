@@ -43,7 +43,6 @@ namespace Factotum
 			this.Text = newRecord ? 
 				"New Special Calibration Parameter" : 
 				"Edit Special Calibration Parameter";
-			btnOK.Enabled = Globals.ActivationOK;
 		}
 
 		//---------------------------------------------------------

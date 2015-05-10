@@ -63,9 +63,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.btnExportConfig.Enabled = Globals.IsMasterDB;
-			this.btnExportConfig.Visible = Globals.IsSystemMaster;
-
-			this.btnOK.Enabled = Globals.ActivationOK;
 
 			ESite.Changed += new EventHandler<EntityChangedEventArgs>(ESiteOrEUnit_Changed);
 			EUnit.Changed += new EventHandler<EntityChangedEventArgs>(ESiteOrEUnit_Changed);

@@ -44,11 +44,6 @@ namespace Factotum
 		{
 			SetControlValues();
 			this.Text = newRecord ? "New Inspection" : "Edit Inspection";
-			this.btnAddDset.Enabled = Globals.ActivationOK;
-			this.btnDeleteDset.Enabled = Globals.ActivationOK;
-			this.btnMoveDown.Enabled = Globals.ActivationOK;
-			this.btnMoveUp.Enabled = Globals.ActivationOK;
-			this.btnOK.Enabled = Globals.ActivationOK;
 
 		}
 		private void InspectedComponentEdit_Load(object sender, EventArgs e)
@@ -112,10 +107,7 @@ namespace Factotum
 		{
 			// Make sure there's a row selected
 			if (dgvDatasets.SelectedRows.Count != 1) return;
-			if (Globals.ActivationOK)
-			{
-				if (!performSilentSave()) return;
-			}
+			if (!performSilentSave()) return;
 			Guid? currentEditItem = (Guid?)(dgvDatasets.SelectedRows[0].Cells["ID"].Value);
 			// First check to see if an instance of the form set to the selected ID already exists
 			if (!Globals.CanActivateForm(this, "DsetEdit", currentEditItem))
@@ -355,12 +347,11 @@ namespace Factotum
 		{
 			bool hasGrid = curInspection.InspectionHasGrid;
 			bool hasGraphic = curInspection.InspectionHasGraphic;
-			btnAddEditGrid.Enabled = dgvDatasets.Rows.Count > 0 && (hasGrid || Globals.ActivationOK);
+			btnAddEditGrid.Enabled = dgvDatasets.Rows.Count > 0;
 			btnAddEditGrid.Text = hasGrid ? "Edit Grid" : "Add Grid";
-			btnAddEditGraphic.Enabled = Globals.ActivationOK;
 			btnAddEditGraphic.Text = hasGraphic ? "Edit Graphic" : "Add Graphic";
-			btnDeleteGrid.Enabled = hasGrid && Globals.ActivationOK;
-			btnDeleteGraphic.Enabled = hasGraphic && Globals.ActivationOK;
+			btnDeleteGrid.Enabled = hasGrid;
+			btnDeleteGraphic.Enabled = hasGraphic;
 		}
 
 		// No prompting is performed.  The user should understand the meanings of OK and Cancel.
@@ -441,10 +432,7 @@ namespace Factotum
 
 		private void btnAddEditGrid_Click(object sender, EventArgs e)
 		{
-			if (Globals.ActivationOK)
-			{
-				if (!performSilentSave()) return;
-			}
+			if (!performSilentSave()) return;
 			Guid? gridID = curInspection.GridID;
 			GridEdit frm;
 			if (gridID == null)
@@ -470,10 +458,7 @@ namespace Factotum
 
 		private void btnAddEditGraphic_Click(object sender, EventArgs e)
 		{
-			if (Globals.ActivationOK)
-			{
-				if (!performSilentSave()) return;
-			}
+			if (!performSilentSave()) return;
 			Guid? graphicID = curInspection.GraphicID;
 			GraphicEdit frm;
 			if (graphicID == null)

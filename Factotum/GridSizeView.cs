@@ -29,8 +29,6 @@ namespace Factotum
 		{
 			// Set these combos to their defaults
 			cboStatusFilter.SelectedIndex = (int)FilterActiveStatus.ShowActive;
-			btnAdd.Enabled = Globals.ActivationOK;
-			btnDelete.Enabled = Globals.ActivationOK;
 		}
 
 		// Set the status filter to show active tools by default

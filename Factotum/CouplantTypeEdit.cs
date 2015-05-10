@@ -41,7 +41,6 @@ namespace Factotum
 		{
 			SetControlValues();
 			this.Text = newRecord ? "New Couplant Type" : "Edit Couplant Type";
-			this.btnOK.Enabled = Globals.ActivationOK;
 		}
 
 		//---------------------------------------------------------

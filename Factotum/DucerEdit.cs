@@ -54,7 +54,6 @@ namespace Factotum
 
 			SetControlValues();
 			this.Text = newRecord ? "New Transducer" : "Edit Transducer";
-			this.btnOK.Enabled = Globals.ActivationOK;
 
 			EDucerModel.Changed += new EventHandler<EntityChangedEventArgs>(EDucerModel_Changed);
 			EKit.Changed += new EventHandler<EntityChangedEventArgs>(EKit_Changed);
