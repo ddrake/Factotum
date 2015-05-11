@@ -12,3 +12,9 @@ The programming machine/environment I used for development of this project has r
 I think this project would benefit by converting to use SQL Express instead of the poorly supported SQL Compact Edition.  I would recommend replacing the home-made ORM with a modern, well-supported one like Entity Framework 6, and upgrading/re-writing the code to use at least .NET 4.0.  Unfortunately, .NET 4.5 and above will not work on Windows XP machines, and there may still be some of these at some nuclear plants.  The project would also benefit from documentation, which is sorely lacking.
 
 At this point, I don't have plans to add any more features or upgrade/test for later versions of Windows.  Any interested parties should feel free to fork this repository and make any changes they find useful.
+
+The current release, version 1.24 is available here on the 'releases' tab.
+Here are some older versions in case they might be useful:
+
+http://dowdrake.com/uploads/factotum/Factotum_v1.23_Setup.zip
+http://dowdrake.com/uploads/factotum/Factotum_1.22_setup.zip
