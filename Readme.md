@@ -9,7 +9,7 @@ The original application code contained some complicated functionality which was
 
 The old programming machine/environment I used for development of this project failed the day after I released version 1.24, and due to limitations of my current development environment (a Windows 7 virtual machine running on a cheap laptop with a Linux Mint host), I have converted this project from Visual Studio 2005 to Sharp Develop 5.1.  The original Setup project could not be automatically converted, so I'm working on creating a new one using Wix.  It's turning out to be a complicated task (and not particularly interesting) so it's unlikely that I'll finish it any time soon.
 
-Going forwared, I think this project would benefit by converting to use SQL Express instead of the poorly supported SQL Compact Edition.  If I had sufficient motivation, I would plan to replace the home-made ORM with a modern, well-supported one like Entity Framework 6, and upgrade/re-write the code to take advantage of .NET 4.0 features.
+Going forward, I think this project would benefit by converting to use SQL Express instead of the poorly supported SQL Compact Edition.  If I had sufficient motivation, I would plan to replace the home-made ORM with a modern, well-supported one like Entity Framework 6, and upgrade/re-write the code to take advantage of .NET 4.0 features.
 
 This project would also benefit from documentation, which is sorely lacking.
 
@@ -19,4 +19,5 @@ The current release, version 1.24 (5/8/2015) is available here on the 'releases'
 Here are links to some older versions in case they might be useful:
 
 http://dowdrake.com/uploads/factotum/Factotum_v1.23_Setup.zip
+
 http://dowdrake.com/uploads/factotum/Factotum_1.22_setup.zip
